@@ -18,6 +18,8 @@ let acceleration = 0.2;
 let currSAR = 0;
 let prevSAR = 0;
 
+const timeframe = 21;
+
 var questions = [
     {
       type: 'input',
@@ -48,13 +50,13 @@ inquirer.prompt(questions).then(async (res)=>{
     highestHigh = pricesAsArray[0];
     lowestLow = pricesAsArray[0];
 
-    let average21 = 0;
-    for(let i = pricesAsArray.length-21; i < pricesAsArray.length;i++){
-        average21 += pricesAsArray[i]/21;
+    let averageTimeframe = 0;
+    for(let i = pricesAsArray.length-timeframe; i < pricesAsArray.length;i++){
+        averageTimeframe += pricesAsArray[i]/timeframe;
     }
 
     let stanDev = 0;
-    stanDev = Math.sqrt((pricesAsArray[pricesAsArray.length-1] - average21) * (pricesAsArray[pricesAsArray.length-1] - average21));
+    stanDev = Math.sqrt((pricesAsArray[pricesAsArray.length-1] - averageTimeframe) * (pricesAsArray[pricesAsArray.length-1] - averageTimeframe));
 
     for(let i = 0;i<pricesAsArray.length;i++){
 
@@ -111,17 +113,17 @@ inquirer.prompt(questions).then(async (res)=>{
     }
     
     //Price average display.
-    if(pricesAsArray[pricesAsArray.length - 1] > average21){
-        console.log("\nPrice is above the 21 day average of "+average21+"!");
+    if(pricesAsArray[pricesAsArray.length - 1] > averageTimeframe){
+        console.log("\nPrice is above the" + timeframe + "day average of "+averageTimeframe+"!");
     }
     else{
-        console.log("\nPrice is not above the 21 day average of "+average21+".");
+        console.log("\nPrice is not above the " + timeframe + " day average of "+averageTimeframe+".");
     }
 
-    if(((average21 + stanDev) - (average21 - stanDev)) / average21 >= 0.07){
+    if(((averageTimeframe + stanDev) - (averageTimeframe - stanDev)) / averageTimeframe >= 0.07){
         console.log("\nThe market is in high volatility. No bollinger band squeeze.");
     }
-    else if(((average21 + stanDev) - (average21 - stanDev)) / average21 >= 0.04){
+    else if(((averageTimeframe + stanDev) - (averageTimeframe - stanDev)) / averageTimeframe >= 0.04){
         console.log("\nMarket is becoming volatile. Bollinger band expansion or contraction may be occuring.");
     }
     else{
@@ -130,8 +132,8 @@ inquirer.prompt(questions).then(async (res)=>{
 
     //Mean display
     if(process.argv.includes("-v")){
-        console.log("\nBollinger band width is "+((average21 + stanDev) - (average21 - stanDev)) / average21);
-        console.log("\nMean is: "+average21+". Standard deviation is: "+stanDev+".")
+        console.log("\nBollinger band width is "+((averageTimeframe + stanDev) - (averageTimeframe - stanDev)) / averageTimeframe);
+        console.log("\nMean is: "+averageTimeframe+". Standard deviation is: "+stanDev+".")
     }
 
     //Current price display.
