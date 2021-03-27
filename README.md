@@ -2,7 +2,7 @@
 ExAMPle stands for EXamine A Market PLEase. It's used to analyze market trends in OSRS. If desired, it could be used to predict the increase or decrease in price of certain items over time.
 
 # How do I use ExAMPle?
-To use ExAMPle, you need to install NodeJS from [here](https://nodejs.org/en/). Once installed, use the command line to navigate to the folder you downloaded "getItemsPSAR.js" to and use the command "node getItemsPSAR.js". Optionally, you can add -v to the end of the command to give the Bollinger Band width, the mean price over 21 days, and the standard deviation of the price over 21 days. Simply input the name of the item you want to check and the information will output to the console.
+To use ExAMPle, you need to install NodeJS from [here](https://nodejs.org/en/). Once installed, use the command line to navigate to the folder you downloaded "getItemsPSAR.js" to and use the command "npm install" to get the required packages, then use the command "node getItemsPSAR.js" to run ExAMPle. Optionally, you can add -v to the end of the command to give the Bollinger Band width, the mean price over 21 days, and the standard deviation of the price over 21 days. Simply input the name of the item you want to check and the information will output to the console.
 
 # Why 21 days?
 It's a sample timeframe I thought would be appropriate for the 180 day range that the OSRS-Exchange API gives for prices.
