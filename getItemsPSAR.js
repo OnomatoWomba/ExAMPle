@@ -114,7 +114,7 @@ inquirer.prompt(questions).then(async (res)=>{
     
     //Price average display.
     if(pricesAsArray[pricesAsArray.length - 1] > averageTimeframe){
-        console.log("\nPrice is above the" + timeframe + "day average of "+averageTimeframe+"!");
+        console.log("\nPrice is above the " + timeframe + " day average of "+averageTimeframe+"!");
     }
     else{
         console.log("\nPrice is not above the " + timeframe + " day average of "+averageTimeframe+".");
